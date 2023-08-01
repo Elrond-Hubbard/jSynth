@@ -9,7 +9,7 @@ const waveForms = [
     'sawtooth',
     'triangle'
 ];
-waveSelector.addEventListener('change', function() {
+waveSelector.addEventListener('input', function() {
     waveLabel.innerText = waveForms[waveSelector.value];
 })
 
