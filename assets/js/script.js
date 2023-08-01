@@ -1,4 +1,6 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///// OSCILLATOR MODULE /////
 
 // WAVEFORM CONTROL
 const waveSelector = document.querySelector('#wave-selector');
@@ -13,10 +15,8 @@ waveSelector.addEventListener('input', function() {
     waveLabel.innerText = waveForms[waveSelector.value];
 })
 
-// OSCILLATOR TRIGGER
-const playButton = document.querySelector('#play');
-playButton.addEventListener('click', playTone);
-function playTone() {
+// OSCILLATOR
+function Oscillator() {
     const actx = new (AudioContext);
     const osc = actx.createOscillator();
     osc.type = waveForms[waveSelector.value];
@@ -25,3 +25,7 @@ function playTone() {
     osc.start();
     osc.stop(actx.currentTime + 0.5);
 }
+
+// TRIGGER
+const playButton = document.querySelector('#play');
+playButton.addEventListener('click', Oscillator);
