@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>jSynth</title>
     <link rel="stylesheet" src="./assets/css/style.css">
 </head>
 
@@ -13,22 +13,28 @@
     <section id="osc-controls">
         <input type="range" id="wave-selector" min="0" max="3"></input>
         <p id="wave-label">sawtooth</p>
+        <input type="range" id="unison-width" min="0" max="15" value="0"></input>
+        <p>Unison</p>
+    </section>
+
+    <section id="play-trigger">
+        <button id="play">PLAY</button>
     </section>
 
     <section id="key-triggers">
-        <button id="button">C</button>
-        <button>C#</button>
-        <button>D</button>
-        <button>D#</button>
-        <button>E</button>
-        <button>F</button>
-        <button>F#</button>
-        <button>G</button>
-        <button>G#</button>
-        <button>A</button>
-        <button>A#</button>
-        <button>B</button>
-        <button>C</button>
+        <button data-note="c-4">C</button>
+        <button data-note="c#4">C#</button>
+        <button data-note="d-4">D</button>
+        <button data-note="d#4">D#</button>
+        <button data-note="e-4">E</button>
+        <button data-note="f-4">F</button>
+        <button data-note="f#4">F#</button>
+        <button data-note="g-4">G</button>
+        <button data-note="g#4">G#</button>
+        <button data-note="a-4">A</button>
+        <button data-note="a#4">A#</button>
+        <button data-note="b-4">B</button>
+        <button data-note="c-5">C</button>
     </section>
 
 </body>
