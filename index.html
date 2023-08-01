@@ -5,23 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jSynth</title>
-    <link rel="stylesheet" src="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
-    <section id="osc-controls">
+    <section id="osc-controls" class="module">
+        <h2>Oscillator</h2>
         <input type="range" id="wave-selector" min="0" max="3"></input>
         <p id="wave-label">sawtooth</p>
         <input type="range" id="unison-width" min="0" max="15" value="0"></input>
         <p>Unison</p>
     </section>
 
-    <section id="play-trigger">
-        <button id="play">PLAY</button>
-    </section>
-
-    <section id="key-triggers">
+    <section id="key-triggers" class = "module">
+        <h2>Triggers</h2>
         <button data-note="c-4">C</button>
         <button data-note="c#4">C#</button>
         <button data-note="d-4">D</button>
