@@ -22,6 +22,13 @@ unisonSlider.addEventListener('input', function () {
     unisonWidth = unisonSlider.value;
 })
 
+// OCTAVE
+const octaveSwitch = document.querySelector('#octave');
+var octave = octaveSwitch.value
+octaveSwitch.addEventListener('input', function () {
+    octave = octaveSwitch.value;
+})
+
 // OSCILLATORS
 function oscillatorModule(freq, detune) {
     const osc = actx.createOscillator();
@@ -36,7 +43,7 @@ function oscillatorModule(freq, detune) {
 const env = actx.createGain();
 env.connect(actx.destination);
 var decay = 0.75;
-var attack = 0.5;
+var attack = 0.75;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +75,7 @@ document.querySelectorAll('button[data-note]').forEach((button) => {
         event.preventDefault;
         event.stopPropagation();
         oscBank = new Array(3);
-        oscBank[0] = oscillatorModule(freq, 0);
+        oscBank[0] = oscillatorModule((freq*octave), 0);
         oscBank[1] = oscillatorModule(freq, unisonWidth);
         oscBank[2] = oscillatorModule(freq, -unisonWidth);
         env.gain.cancelScheduledValues(actx.currentTime);
