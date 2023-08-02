@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+const actx = new (AudioContext || webkitAudioContext());
 ///// KEY CONTROLLER MODULE /////
 
-// TRIGGERS
+// NOTE FREQUENCY BANK
 const NOTES = {
     'c-4': 261.626,
     'c#4': 277.183,
@@ -19,12 +19,24 @@ const NOTES = {
     'c-5': 523.251
 }
 
+let keyPressed = false;
+
+// TRIGGER OSCILLATOR
 document.querySelectorAll('button[data-note]').forEach((button) => {
     const freq = (NOTES[button.dataset.note])
-    button.addEventListener('click', function () {
-        oscBank[0] = createOscillator(freq, 0);
-        oscBank[1] = createOscillator(freq, unisonWidth);
-        oscBank[2] = createOscillator(freq, -unisonWidth);
+    button.addEventListener('pointerdown', function (event) {
+        event.preventDefault;
+        oscBank = new Array(3);
+        oscBank[0] = createOscillator(freq, 0, keyPressed);
+        oscBank[1] = createOscillator(freq, unisonWidth, keyPressed);
+        oscBank[2] = createOscillator(freq, -unisonWidth, keyPressed);
+        oscBank.forEach(osc => {
+            osc.start();
+        })
+    })
+    button.addEventListener('pointerup', function (event) {
+        event.preventDefault;
+        oscBank.forEach(osc => osc.stop());
     })
 })
 
@@ -54,17 +66,11 @@ unisonSlider.addEventListener('input', function () {
 })
 
 // OSCILLATORS
-oscBank = new Array(3);
 function createOscillator(freq, detune) {
-    const actx = new (AudioContext || webkitAudioContext());
     const osc = actx.createOscillator();
     osc.type = WAVEFORM[waveSelector.value];
-    osc.frequency.value = freq; //Hz = bass A
+    osc.frequency.value = freq;
     osc.detune.value = detune;
-    osc.connect(actx.destination); //pc audio output
-    osc.start();
-    osc.stop(actx.currentTime + 5);
-    // return osc;
+    osc.connect(actx.destination)
+    return osc;
 }
-
-
