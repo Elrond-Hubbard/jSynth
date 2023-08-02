@@ -40,8 +40,19 @@ function oscillatorModule(freq, detune) {
 }
 
 
+
+// COMPRESSOR
+const compressor = actx.createDynamicsCompressor();
+compressor.threshold.setValueAtTime(-50, actx.currentTime);
+compressor.knee.setValueAtTime(40, actx.currentTime);
+compressor.ratio.setValueAtTime(12, actx.currentTime);
+compressor.attack.setValueAtTime(0, actx.currentTime);
+compressor.release.setValueAtTime(0.25, actx.currentTime);
+compressor.connect(actx.destination);
+
+// ENVELOPE
 const env = actx.createGain();
-env.connect(actx.destination);
+env.connect(compressor);
 var decay = 0.75;
 var attack = 0.75;
 
@@ -72,10 +83,11 @@ const NOTES = {
 document.querySelectorAll('button[data-note]').forEach((button) => {
     const freq = (NOTES[button.dataset.note] * 0.5);
     button.addEventListener('pointerdown', function (event) {
+        console.log('mouse down')
         event.preventDefault;
         event.stopPropagation();
         oscBank = new Array(3);
-        oscBank[0] = oscillatorModule((freq*octave), 0);
+        oscBank[0] = oscillatorModule(freq * octave, 0);
         oscBank[1] = oscillatorModule(freq, unisonWidth);
         oscBank[2] = oscillatorModule(freq, -unisonWidth);
         env.gain.cancelScheduledValues(actx.currentTime);
@@ -86,6 +98,7 @@ document.querySelectorAll('button[data-note]').forEach((button) => {
         })
     })
     button.addEventListener('pointerup', function (event) {
+        console.log('mouse up')
         event.preventDefault;
         oscBank.forEach(osc => {
             event.preventDefault();
