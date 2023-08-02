@@ -12,5 +12,5 @@ To add an octave to the oscillator, use the "Octave" switch.
 
 ## Known Issues
 Notes may sometimes become stuck during quick mouse movements.  
-(this can be exploited to create drone notes!)
+(this can be exploited to create drone notes!)  
 Gain envelope does not always trigger correctly.
