@@ -5,10 +5,16 @@
 }
 
 body {
-    margin: 10% 30%;
+    margin: 10% 20%;
 }
 
 .module {
     border: 2px solid;
     padding: 5%;
+}
+
+button {
+    height: 100px;
+    width: 30px;
+    
 }
